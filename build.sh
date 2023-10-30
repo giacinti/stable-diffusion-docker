@@ -34,10 +34,11 @@ clean() {
 dev() {
     check_token
     docker run --rm --gpus=all --entrypoint=sh \
-        -v huggingface:/home/huggingface/.cache/huggingface \
+        -v "$PWD"/huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/input:/home/huggingface/input \
         -v "$PWD"/output:/home/huggingface/output \
         -v "$PWD"/token.txt:/home/huggingface/token.txt \
+        -v "$PWD"/tmp:/tmp \
         -it "$CWD"
 }
 
@@ -51,10 +52,11 @@ run() {
     check_token
     set_gpu_arg "$@"
     docker run --rm ${GPU_ARG} \
-        -v huggingface:/home/huggingface/.cache/huggingface \
+        -v "$PWD"/huggingface:/home/huggingface/.cache/huggingface \
         -v "$PWD"/input:/home/huggingface/input \
         -v "$PWD"/output:/home/huggingface/output \
         -v "$PWD"/token.txt:/home/huggingface/token.txt \
+        -v "$PWD"/tmp:/tmp \
         "$CWD" "$@"
 }
 
@@ -100,7 +102,7 @@ tests() {
         --prompt "bouquet of roses"
 }
 
-mkdir -p input output
+mkdir -p huggingface input output tmp
 case ${1:-build} in
     build) build ;;
     clean) clean ;;
