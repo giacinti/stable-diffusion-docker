@@ -1,18 +1,24 @@
 #!/usr/bin/env python
-import argparse, datetime, inspect, os, re, warnings
+import argparse
+import datetime
+import inspect
+import os
+import re
+import warnings
+
 import numpy as np
 import torch
-from PIL import Image
 from diffusers import (
-    AutoPipelineForText2Image,
     AutoPipelineForImage2Image,
     AutoPipelineForInpainting,
+    AutoPipelineForText2Image,
     DiffusionPipeline,
-    OnnxStableDiffusionPipeline,
-    OnnxStableDiffusionInpaintPipeline,
     OnnxStableDiffusionImg2ImgPipeline,
+    OnnxStableDiffusionInpaintPipeline,
+    OnnxStableDiffusionPipeline,
     schedulers,
 )
+from PIL import Image
 
 
 def iso_date_time():

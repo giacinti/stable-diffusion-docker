@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "stable-diffusion-docker"
+version = "v1.41.0"
+description = "Run the official Stable Diffusion releases in a Docker container with txt2img, img2img, depth2img, pix2pix, upscale4x, and inpaint."
+authors = ["https://github.com/fboulnois"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+torch = ">=2.0.0, !=2.0.1, !=2.1.0" # see here: https://github.com/pytorch/pytorch/issues/100974
+diffusers = {extras = ["torch"], version = "^0.21.4"}
+onnxruntime = "^1.16.1"
+safetensors = "^0.4.0"
+transformers = "^4.34.1"
+#xformers = "0.0.21"
+
+[tool.poetry.group.dev.dependencies]
+mypy = "^1.5.1"
+types-pillow = "^10.1.0.0"
+
+
+[tool.mypy]
+namespace_packages = true
+explicit_package_bases = true
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
